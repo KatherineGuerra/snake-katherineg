@@ -127,5 +127,4 @@ function setFoodPosition() {
 
 function keyboardHandler(event) {
     console.log(event);
-    keycode(37);
 }
