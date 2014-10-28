@@ -11,3 +11,24 @@ body {
     position: absolute;
     visibility: hidden;
 }
+
+h1, h3 {
+    font-family: 'Indie Flower', cursive;
+    color: magenta;
+    text-align: center;
+}
+
+.title {
+    font-size: 62px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+#restartButton {
+    border: 2px double cyan;
+    border-radius: 10px;
+}
+
+#restartButton:hover {
+    background-color: darkcyan;
+}
