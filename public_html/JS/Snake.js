@@ -20,6 +20,7 @@ var restartButton;
 var playHUD;
 var scoreboard;
 
+
 /*----------------------------------------------------------------------------
  * Executing Game Code
  * ---------------------------------------------------------------------------
@@ -90,7 +91,7 @@ function gameRestart() {
 
 function snakeInitialize() {
     snake = [];
-    snakeLength = 1;
+    snakeLength = 10;
     snakeSize = 20;
     snakeDirection = "down";
 
@@ -128,6 +129,7 @@ function snakeUpdate() {
 
     checkFoodCollisions(snakeHeadX, snakeHeadY);
     checkWallCollisions(snakeHeadX, snakeHeadY);
+    checkSnakeCollisions(snakeHeadX, snakeHeadY);
 
     snakeTail = snake.pop();
     snakeTail.x = snakeHeadX;
@@ -201,11 +203,33 @@ function checkFoodCollisions(snakeHeadX, snakeHeadY) {
         });
         snakeLength++;
     }
+    
+    if (snakeHeadX == food.x && snakeHeadY == food.y) {
+        snake.random({
+            x: 0,
+            y: 0
+        });
+        sankeLength--;
+    }
+   
 }
 
 function checkWallCollisions(snakeHeadX, snakeHeadY) {
     if (snakeHeadX * snakeSize >= screenWidth || snakeHeadX * snakeSize < 0) {
         setState("GAME OVER");
+    }
+    
+    if(snakeHeadY * snakeSize >= screenHeight || snakeHeadY* snakeSize < 0) {
+        setState("GAME OVER");
+    }
+}
+
+function checkSnakeCollisions(snakeHeadX, snakeHeadY) {
+    for(var index = 1; index < snake.length; index++) {
+        if(snakeHeadX == snake[index].x && snakeHeadY == snake[index].y) {
+            setState("GAME OVER");
+            return;
+        }
     }
 }
 
