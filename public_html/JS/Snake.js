@@ -21,6 +21,9 @@ var playHUD;
 var scoreboard;
 
 
+var PlayButton;
+var SnakeMenu;
+
 /*----------------------------------------------------------------------------
  * Executing Game Code
  * ---------------------------------------------------------------------------
@@ -57,7 +60,13 @@ function gameInitialize() {
     playHUD = document.getElementById("playHUD");
     scoreboard = document.getElementById("scoreboard");
     
-    setState("PLAY");
+    SnakeMenu = document.getElementById("Snake");
+    centerMenuPosition(SnakeMenu);
+    
+    PlayButton = document.getElementById("PlayButton");
+    PlayButton.addEventListener("click", gamePlay);
+    
+    setState("Snake");
 }
 
 function gameLoop() {
@@ -81,6 +90,13 @@ function gameRestart() {
     snakeInitialize();
     foodInitialize();
     hideMenu(gameOverMenu);
+    setState("PLAY");
+}
+
+function gamePlay() {
+    snakeInitialize();
+    foodInitialize();
+    hideMenu(SnakeMenu);
     setState("PLAY");
 }
 
@@ -202,14 +218,7 @@ function checkFoodCollisions(snakeHeadX, snakeHeadY) {
             y: 0
         });
         snakeLength++;
-    }
-    
-    if (snakeHeadX == food.x && snakeHeadY == food.y) {
-        snake.random({
-            x: 0,
-            y: 0
-        });
-        sankeLength--;
+        setFoodPosition();
     }
    
 }
@@ -231,6 +240,7 @@ function checkSnakeCollisions(snakeHeadX, snakeHeadY) {
             return;
         }
     }
+    
 }
 
 /*----------------------------------------------------------------------------
@@ -259,6 +269,13 @@ function hideMenu(menu){
 function showMenu(state) {
     if (state =="GAME OVER") {
         displayMenu(gameOverMenu);
+    }
+    else if (state =="PLAY") {
+        displayMenu(playHUD);
+    }
+    
+    if (state == "Snake") {
+        displayMenu(SnakeMenu);
     }
     else if (state =="PLAY") {
         displayMenu(playHUD);

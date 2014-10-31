@@ -7,7 +7,7 @@ body {
     display: block;
 }
 
-#gameOver, #playHUD {
+#gameOver, #playHUD, #Snake{
     position: absolute;
     visibility: hidden;
 }
@@ -17,19 +17,23 @@ h1, h2, h3 {
     color: magenta;
     text-align: center;
 }
-
+/*I chose to put the font size 82px so it wont be too big*/ 
 .title {
-    font-size: 62px;
+    font-size: 82px;
     margin-bottom: 0px;
     margin-top: 0px;
 }
-
-#restartButton {
+/*I just added #PlayButton so that it can be the same click button as #restartButton*/ 
+#restartButton, #PlayButton {
     border: 2px double cyan;
     border-radius: 10px;
 }
 
 #restartButton:hover {
+    background-color: darkcyan;
+}
+
+#PlayButton:hover {
     background-color: darkcyan;
 }
 
